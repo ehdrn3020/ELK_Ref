@@ -1,7 +1,0 @@
-###INSTALLATION###
-
-#Elasticsearch requires at least Java 8. Specifically as of this writing, 
-#it is recommended that you use the Oracle JDK version 1.8.0_131
-
-#You can be guided following URL in Elasticsearch.
-https://www.elastic.co/guide/en/elasticsearch/reference/5.5/_installation.html
