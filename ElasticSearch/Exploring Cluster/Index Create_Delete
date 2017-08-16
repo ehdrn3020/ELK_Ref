@@ -1,0 +1,45 @@
+###Index Create_Delete###
+
+
+#Create Index 'customer'
+$ curl -XPUT 'localhost:9200/customer?pretty&pretty'
+{
+  "acknowledged" : true,
+  "shards_acknowledged" : true
+}
+
+
+#Check indices
+$ curl -XGET 'localhost:9200/_cat/indices?v&pretty'
+health status index    uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+yellow open   customer 95SQ4TSUT7mWBT7VNHH67A   5   1          0            0       260b           260b
+
+
+#Create documnet for apply to index
+$ curl -XPUT 'localhost:9200/customer/external/1?pretty&pretty' -H 'Content-Type: application/json' -d'
+> {
+>   "name": "John Doe"
+> }
+> '
+
+#It is important to note that Elasticsearch does not require you to explicitly create an index first 
+#before you can index documents into it. In the previous example, 
+#Elasticsearch will automatically create the customer index if it didn’t already exist beforehand.
+
+
+#Respones
+$ curl -XGET 'localhost:9200/customer/external/1?pretty&pretty'
+{
+  "_index" : "customer",
+  "_type" : "external",
+  "_id" : "1",
+  "_version" : 1,
+  "found" : true,
+  "_source" : { "name": "John Doe" }
+}
+
+
+#DELETE Index
+$ curl -XDELETE 'localhost:9200/customer?pretty&pretty'
+
+
