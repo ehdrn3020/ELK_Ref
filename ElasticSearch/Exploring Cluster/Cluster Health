@@ -1,0 +1,15 @@
+###Cluster Health###
+
+#To check the cluster health, we will be using the _cat API.
+
+$ curl -XGET 'localhost:9200/_cat/health?v&pretty'
+epoch      timestamp cluster       status node.total node.data shards pri relo init unassign pending_tasks max_task_wait_time active_shards_percent
+1475247709 17:01:49  elasticsearch green           1         1      0   0    0    0        0             0                  -                100.0%
+
+
+#We can also get a list of nodes in our cluster as follows.
+
+$ curl -XGET 'localhost:9200/_cat/nodes?v&pretty'
+ip        heap.percent ram.percent cpu load_1m load_5m load_15m node.role master name
+127.0.0.1           10           5   5    4.46                        mdi      *      PB2SGZY
+
