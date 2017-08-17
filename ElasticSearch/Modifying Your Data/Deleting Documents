@@ -1,0 +1,4 @@
+###Deleting Documents
+
+$ curl -XDELETE 'localhost:9200/customer/external/2?pretty&pretty'
+
