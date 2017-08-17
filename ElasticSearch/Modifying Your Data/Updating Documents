@@ -1,0 +1,26 @@
+###Updating Documents###
+
+
+#Update documnet index:customer, ID:1 name:"Gil Hong"  to  "Jane Doe"
+$ curl -XPOST 'localhost:9200/customer/external/1/_update?pretty&pretty' -H 'Content-Type: application/json' -d'
+{
+  "doc": { "name": "Jane Doe" }
+}
+'
+
+
+#Update Add field 'age' to document
+$ curl -XPOST 'localhost:9200/customer/external/1/_update?pretty&pretty' -H 'Content-Type: application/json' -d'
+{
+  "doc": { "name": "Jane Doe", "age": 20 }
+}
+'
+
+
+#In the above example, ctx._source refers to the current source document that is about to be updated.(single document)
+$ curl -XPOST 'localhost:9200/customer/external/1/_update?pretty&pretty' -H 'Content-Type: application/json' -d'
+{
+  "script" : "ctx._source.age += 5"
+}
+'
+
