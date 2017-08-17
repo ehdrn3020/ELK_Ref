@@ -1,9 +1,37 @@
-curl -XPUT 'localhost:9200/customer/external/1?pretty&pretty' -H 'Content-Type: application/json' -d'
+###Indexing_Replacing Document###
+
+
+$ curl -XPUT 'localhost:9200/customer/external/1?pretty&pretty' -H 'Content-Type: application/json' -d'
 {
   "name": "John Doe"
 }
 '
-curl -XPUT 'localhost:9200/customer/external/2?pretty&pretty' -H 'Content-Type: application/json' -d'
+
+
+#Again, the above will index the specified document into the customer index, external type, with the ID of 1. 
+#If we then executed the above command again with a different (or same) document, 
+#Elasticsearch will replace (i.e. reindex) a new document on top of the existing one with the ID of 1
+
+$ curl -XPUT 'localhost:9200/customer/external/1?pretty&pretty' -H 'Content-Type: application/json' -d'
+{
+  "name": "Jane Doe"
+}
+'
+
+
+#we use a different ID, a new document will be indexed and the existing document(s) already in the index remains untouched.
+
+$ curl -XPUT 'localhost:9200/customer/external/2?pretty&pretty' -H 'Content-Type: application/json' -d'
+{
+  "name": "Jane Doe"
+}
+'
+
+
+#This example shows how to index a document without an explicit ID
+#Note that in the above case, we are using the POST verb instead of PUT since we didn’t specify an ID.
+
+$ curl -XPOST 'localhost:9200/customer/external?pretty&pretty' -H 'Content-Type: application/json' -d'
 {
   "name": "Jane Doe"
 }
